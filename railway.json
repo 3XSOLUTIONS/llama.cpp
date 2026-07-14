@@ -6,9 +6,9 @@
     "dockerfileTarget": "server"
   },
   "deploy": {
-    "startCommand": "/app/llama-server --host 0.0.0.0 --port ${PORT:-8080} --hf-repo ${LLAMA_HF_REPO:-Qwen/Qwen2.5-3B-Instruct-GGUF:Q4_K_M} --ctx-size ${LLAMA_CTX_SIZE:-8192} --threads $(nproc) --api-key ${LLAMA_API_KEY}",
+    "startCommand": "/app/llama-server --host 0.0.0.0 --port ${PORT:-8080} --hf-repo ${LLAMA_HF_REPO:-Qwen/Qwen2.5-3B-Instruct-GGUF:Q4_K_M} --ctx-size ${LLAMA_CTX_SIZE:-8192} --threads $(nproc) ${LLAMA_API_KEY:+--api-key \"$LLAMA_API_KEY\"}",
     "healthcheckPath": "/health",
-    "healthcheckTimeout": 600,
+    "healthcheckTimeout": 900,
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 3
   }
